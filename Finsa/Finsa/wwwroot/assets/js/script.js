@@ -1,4 +1,4 @@
-
+//Home second Slider
 $('.testimonial-slider').owlCarousel({
     loop:true,
     margin:10,
@@ -18,6 +18,8 @@ $('.testimonial-slider').owlCarousel({
     }
 });
 
+//Home Main Slider
+
 $('.homebanner-slider').owlCarousel({
   loop:true,
   nav:false,
@@ -35,6 +37,8 @@ $('.homebanner-slider').owlCarousel({
       }
   }
 });
+
+//Partner Slider
 
 $('.featuredbyslider').owlCarousel({
     loop:true,
@@ -55,10 +59,14 @@ $('.featuredbyslider').owlCarousel({
     }
   });
 
+//Back to top Click
+
 let pagetop = document.querySelector(".back-to-top");
 pagetop.addEventListener("click", () => {
   window.scrollTo(0, 0);
 });
+
+//Navbar scroolda acilmagi
 
 window.addEventListener("scroll", (e) => {
     if (window.pageYOffset > 200) {
@@ -69,6 +77,7 @@ window.addEventListener("scroll", (e) => {
       }
   });
 
+//Accordion FAQ
 
 let accordionclick = document.querySelectorAll(".gettoknow-accordion ul li a")
 let accordionicon = document.querySelectorAll(".gettoknow-accordion ul li a i")
@@ -91,6 +100,8 @@ for (let i = 0; i < accordionclick.length; i++) {
   })
 };
 
+//About-daki Slider 
+
 $('#about-slider-2').owlCarousel({
   loop:true,
   dots: false,
@@ -106,7 +117,7 @@ $('#about-slider-2').owlCarousel({
   }
 });
 
-
+//Popup Video
 
 $(".youtube-link").grtyoutube({
     theme: "dark" // or dark
@@ -167,6 +178,10 @@ $(".youtube-link").grtyoutube({
     
   // });
 
+
+    //Isotope plugin backda islemir
+
+
  // function projectIsotope() {
 	//	var items = $('.project-isotope').isotope({
 	//		itemSelector: '.isotope-item',
@@ -190,6 +205,8 @@ $(".youtube-link").grtyoutube({
 	//	});
 	//}
 
+ //Preloader
+
   function preloader() {
 		if ($('#preloader').length) {
 			$('#preloader').delay(100).fadeOut(500);      
@@ -200,9 +217,14 @@ $(".youtube-link").grtyoutube({
  // $(document).ready(function () {
 	//	projectIsotope()
 	//});
+
+    //Preloader Loadda islemesi
+
   $(window).on('load', function () {
 		preloader();
 	});
+
+//Responsive NavBar Menu
 
   let rnavbar = document.getElementsByClassName("navbar-responsive-pages")[0];
   let clicknav = document.getElementsByClassName("navbar-toggle")[0];
@@ -220,6 +242,7 @@ $(".youtube-link").grtyoutube({
   });
 
 
+//Subscribe AJAX
 
 $(document).ready(function () {
     let submit = $("#sec-btn");

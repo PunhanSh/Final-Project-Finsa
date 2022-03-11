@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+@*Banner section*@
 <section id="uni-banner" style="background-image: url('Uploads/@Model.Banner.Image');">
     <div class="container">
         <div class="banner-text">
@@ -22,6 +24,8 @@
         <div class="shape-three"></div>
     </div>
 </section>
+
+@*Blogs section*@
 <section id="blogs-section">
     <div class="container">
         <div class="row justify-content-center">
@@ -30,6 +34,8 @@
                     <div class="row justify-content-center">
 
                         <h4 style="color: #14212b; font-weight: 700 ; margin-bottom: 30px;">
+
+                            @*Blog items count*@
                             Showing @if (ViewBag.AllCount != 0)
                             {
                                 @(((ViewBag.Page - 1) * ViewBag.ItemCount) + 1)
@@ -65,6 +71,8 @@
                     </div>
                     <div class="pagination-blog">
                         <ul>
+                            @*Pagination*@ 
+
                             @if (ViewBag.PageCount != 1)
                             {
                                 @if (ViewBag.Page <= 1)
@@ -100,11 +108,10 @@
                 <div class="u-fade-type-right js-scroll-trigger">
                     <div class="asidebar">
                         <div class="aside search-section">
+
+                            @*Blog search*@
                             <form method="get" asp-controller="Blog" asp-action="Index">
                                 <input type="text" name="searchData" placeholder="Search here">
-                                <input asp-for="@Model.vmSearch.page" hidden />
-                                <input asp-for="@Model.vmSearch.catId" hidden />
-                                <input asp-for="@Model.vmSearch.tagId" hidden />
                                 <button type="submit">
                                     <i class="far fa-search"></i>
                                 </button>
@@ -113,6 +120,7 @@
                         <div class="aside category-section">
                             <h4 class="head-div">Category</h4>
                             <ul>
+                                @*Blog Categories*@
                                 @foreach (var item in Model.Categories)
                                 {
                                     <li>
@@ -138,6 +146,7 @@
                                         <div class="single-blog-content">
                                             <span><i class="far fa-calendar-alt"></i>@item.CreatedDate.ToString("dd MMM yyyy");</span>
                                             <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a>
+
                                         </div>
                                     </div>
                                 }
@@ -146,9 +155,13 @@
                         <div class="aside popular-tags">
                             <h4 class="head-div">Popular Tags</h4>
                             <div class="tags-div">
+                                @*Blog Tags*@
                                 @foreach (var item in Model.Tags)
                                 {
                                     <a style="@(item.Id == Model.vmSearch.tagId ? "background-color: #ff4a17 !important;color: #fff !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-tagId="@item.Id">@item.Name</a>
+                                    <input asp-for="@Model.vmSearch.page" hidden />
+                                    <input asp-for="@Model.vmSearch.catId" hidden />
+                                    <input asp-for="@Model.vmSearch.tagId" hidden />
                                 }
                             </div>
                         </div>
@@ -165,6 +178,7 @@
                             </ul>
                         </div>
                         <div class="aside consultation-div" style="background-image: url(assets/img/Blog/cta.jpg);">
+                            @*Blog contact*@
                             <h4>Need Any Consultations</h4>
                             <a asp-controller="Contact" asp-action="Index" class="my-btn">Send Message</a>
                         </div>
@@ -174,6 +188,7 @@
         </div>
     </div>
 </section>
+@*Partners section*@
 <div class="u-fade-type-down js-scroll-trigger">
     <section id="featuredby" class="featured-1">
         <div class="container">

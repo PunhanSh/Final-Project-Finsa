@@ -10,23 +10,23 @@
         </div>
         <div class="col-lg-12">
             <table class="table">
-                <thead>
+                <thead style="border-bottom: 2px solid;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Accordion Head</th>
-                        <th scope="col">Accordion Title</th>
-                        <th scope="col"></th>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Accordion Head</th>
+                        <th style="text-align: center;" scope="col">Accordion Title</th>
+                        <th style="text-align: center;" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (int i = 0; i < Model.Count; i++)
                     {
                      <tr>
-                        <th scope="row">@(i+1)</th>
-                        <td>@(Model[i].AccordionHead != null && Model[i].AccordionHead.Length > 20 ? Model[i].AccordionHead.Substring(0, 20) + "..." : Model[i].AccordionHead)</td>
-                        <td>@(Model[i].AccordionTitle != null && Model[i].AccordionTitle.Length > 50 ? Model[i].AccordionTitle.Substring(0, 50) + "..." : Model[i].AccordionTitle)</td>
+                        <th style="text-align: center;" scope="row">@(i+1)</th>
+                        <td style="text-align: center;">@(Model[i].AccordionHead != null && Model[i].AccordionHead.Length > 20 ? Model[i].AccordionHead.Substring(0, 20) + "..." : Model[i].AccordionHead)</td>
+                        <td style="text-align: center;">@(Model[i].AccordionTitle != null && Model[i].AccordionTitle.Length > 50 ? Model[i].AccordionTitle.Substring(0, 50) + "..." : Model[i].AccordionTitle)</td>
                         
-                        <td>
+                        <td style="text-align: center;">
                             <a class="btn btn-success" asp-area="admin" asp-controller="FAQ" asp-action="Update" asp-route-id="@Model[i].Id">Update</a>
                             <a class="btn btn-danger" asp-area="admin" asp-controller="FAQ" asp-action="Delete" asp-route-id="@Model[i].Id" onclick="return confirm('Are you sure?')">Delete</a>
                         </td>

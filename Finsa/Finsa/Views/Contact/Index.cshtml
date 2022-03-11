@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Index";
 }
+
+@*Banner Section*@
 <section id="uni-banner" style="background-image: url('../../Uploads/@Model.Banner.Image');">
     <div class="container">
         <div class="banner-text">
@@ -22,6 +24,9 @@
         <div class="shape-three"></div>
     </div>
 </section>
+
+@*Contact Section*@
+
 <section id="contact-touch">
     <div class="container">
         <div class="contact-info">
@@ -80,6 +85,9 @@
                         <div class="form-head">
                             <h2>Don’t Hesited To Contact Us</h2>
                         </div>
+
+                        @*Contact Send Message*@
+
                         <form asp-controller="Contact" asp-action="SendMessage" method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="row">
@@ -126,12 +134,17 @@
         </div>
 
     </div>
+    @*Contact Map section*@
+
     <div class="container-fluid container-1600">
         <div class="contact-map">
             <iframe src="@Model.Setting.Map" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
 </section>
+
+@*Partners section*@
+
 <div class="u-fade-type-down js-scroll-trigger">
     <section id="featuredby" class="featured-1">
         <div class="container">

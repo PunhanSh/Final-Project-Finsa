@@ -1,5 +1,6 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,11 +23,15 @@ namespace Finsa.Areas.admin.Controllers
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Index()
         {
             List<Project> model = _context.Projects.ToList();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Create()
         {
             return View();
@@ -80,6 +85,8 @@ namespace Finsa.Areas.admin.Controllers
             return View(model);
 
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Update(int id)
         {
             return View(_context.Projects.Find(id));
@@ -143,6 +150,8 @@ namespace Finsa.Areas.admin.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Delete(int id)
         {
             Project project = _context.Projects.Include(pi => pi.ProjectImages).FirstOrDefault(w => w.Id == id);
@@ -150,6 +159,8 @@ namespace Finsa.Areas.admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Detail(int? Id)
         {
             if (Id != null)

@@ -10,38 +10,38 @@
         </div>
         <div class="col-lg-12">
             <table class="table" style="text-align: center;">
-                <thead>
+                <thead style="border-bottom: 2px solid;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Logo</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">CopyrightLink</th>
-                        <th scope="col">Map</th>
-                        <th scope="col">ContactText</th>
-                        <th scope="col">FAQText</th>
-                        <th scope="col">VideoLink</th>
-                        <th scope="col">VideoLink2</th>
-                        <th scope="col">ServiceVideo</th>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Logo</th>
+                        <th style="text-align: center;" scope="col">Phone</th>
+                        <th style="text-align: center;" scope="col">Email</th>
+                        <th style="text-align: center;" scope="col">Address</th>
+                        <th style="text-align: center;" scope="col">CopyrightLink</th>
+                        <th style="text-align: center;" scope="col">Map</th>
+                        <th style="text-align: center;" scope="col">ContactText</th>
+                        <th style="text-align: center;" scope="col">FAQText</th>
+                        <th style="text-align: center;" scope="col">VideoLink</th>
+                        <th style="text-align: center;" scope="col">VideoLink2</th>
+                        <th style="text-align: center;" scope="col">ServiceVideo</th>
                     </tr>
                 </thead>
                 <tbody style="height: 107px;">
                     <tr>
-                        <th scope="row"></th>
-                        <td><img src="~/Uploads/@Model.Logo" style="width: 100px" alt="Alternate Text" /></td>
-                        <td>@Model.Phone</td>
-                        <td>@Model.Mail</td>
-                        <td>@Model.Address</td>
-                        <td>@Model.CopyrightLink</td>
-                        <td>@(Model.Map != null && Model.Map.Length > 10 ? Model.Map.Substring(0, 10) + "..." : Model.Map)</td>
+                        <th style="text-align: center;" scope="row"></th>
+                        <td style="text-align: center;"><img src="~/Uploads/@Model.Logo" style="width: 100px" alt="Alternate Text" /></td>
+                        <td style="text-align: center;">@Model.Phone</td>
+                        <td style="text-align: center;">@Model.Mail</td>
+                        <td style="text-align: center;">@Model.Address</td>
+                        <td style="text-align: center;">@Model.CopyrightLink</td>
+                        <td style="text-align: center;">@(Model.Map != null && Model.Map.Length > 10 ? Model.Map.Substring(0, 10) + "..." : Model.Map)</td>
                         @*<td>@Html.Raw(Model.AboutUs)</td>*@
-                        <td>@(Model.ContactText != null && Model.ContactText.Length > 10 ? Model.ContactText.Substring(0, 10) + "..." : Model.ContactText)</td>
-                        <td>@(Model.FAQText != null && Model.FAQText.Length > 10 ? Model.FAQText.Substring(0, 10) + "..." : Model.FAQText)</td>
-                        <td>@Model.VideoLink</td>
-                        <td>@Model.VideoLink2</td>
-                        <td>@Model.ServiceVideo</td>
-                        <td>
+                        <td style="text-align: center;">@(Model.ContactText != null && Model.ContactText.Length > 10 ? Model.ContactText.Substring(0, 10) + "..." : Model.ContactText)</td>
+                        <td style="text-align: center;">@(Model.FAQText != null && Model.FAQText.Length > 10 ? Model.FAQText.Substring(0, 10) + "..." : Model.FAQText)</td>
+                        <td style="text-align: center;">@Model.VideoLink</td>
+                        <td style="text-align: center;">@Model.VideoLink2</td>
+                        <td style="text-align: center;">@Model.ServiceVideo</td>
+                        <td style="text-align: center;">
                             <a class="btn btn-success" asp-area="admin" asp-controller="Setting" asp-action="Update" asp-route-id="@Model.Id">Update</a>
                            
                         </td>

@@ -12,44 +12,44 @@
         </div>
         <div class="col-lg-12">
             <table class="table" style="text-align:center;">
-                <thead>
+                <thead style="border-bottom: 2px solid;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Created Date</th>
-                        <th scope="col">Team Name</th>
-                        <th scope="col" style="width:90px">Tag Name</th>
-                        <th scope="col">Category Name</th>
-                        <th scope="col"></th>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Image</th>
+                        <th style="text-align: center;" scope="col">Name</th>
+                        <th style="text-align: center;" scope="col">Description</th>
+                        <th style="text-align: center;" scope="col">Created Date</th>
+                        <th style="text-align: center;" scope="col">Team Name</th>
+                        <th style="text-align: center;" scope="col" style="width:90px">Tag Name</th>
+                        <th style="text-align: center;" scope="col">Category Name</th>
+                        <th style="text-align: center;" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody style="height: 107px;">
                     @for (int i = 0; i < Model.Count; i++)
                      {
                      <tr>
-                        <th scope="row">@(i+1)</th>
-                        <td><img src="~/Uploads/@Model[i].Image" style="width: 100px" alt="Alternate Text" /></td>
-                        <td>@(Model[i].Name != null && Model[i].Name.Length > 50 ? Model[i].Name.Substring(0, 50) + "..." : Model[i].Name)</td>
-                        <td>@Html.Raw(Model[i].Description != null && Model[i].Description.Length > 50 ? Model[i].Description.Substring(0, 50) + "..." : Model[i].Description)</td>
-                        <td>@Model[i].CreatedDate</td>
-                        <td>@Model[i].Team.Name</td>
+                        <th style="text-align: center;" scope="row">@(i+1)</th>
+                        <td style="text-align: center;"><img src="~/Uploads/@Model[i].Image" style="width: 100px" alt="Alternate Text" /></td>
+                        <td style="text-align: center;">@(Model[i].Name != null && Model[i].Name.Length > 50 ? Model[i].Name.Substring(0, 50) + "..." : Model[i].Name)</td>
+                        <td style="text-align: center;">@Html.Raw(Model[i].Description != null && Model[i].Description.Length > 50 ? Model[i].Description.Substring(0, 50) + "..." : Model[i].Description)</td>
+                        <td style="text-align: center;">@Model[i].CreatedDate</td>
+                        <td style="text-align: center;">@Model[i].Team.Name</td>
 
-                        <td>
+                        <td style="text-align: center;">
                             @foreach (var item in Model[i].TagToBlogs)
                              {
                                 <span style="display:block">@item?.Tag.Name</span>
                              }
                         </td>
 
-                        <td>
+                        <td style="text-align: center;">
                             @foreach (var item in Model[i].BlogToCategories)
                              {
                                 <span style="display:block">@item?.Category.Name</span>
                              }
                         </td>
-                        <td>
+                        <td style="text-align: center;">
                             <a class="btn btn-success" style="margin-bottom: 5px;" asp-area="admin" asp-controller="Blog" asp-action="Update" asp-route-id="@Model[i].Id">Update</a>
                             <a class="btn btn-warning" style="margin-bottom: 5px; padding: 6px 16px; display: block;" asp-area="admin" asp-controller="Blog" asp-action="Detail" asp-route-id="@Model[i].Id">Detail</a>
                             <a class="btn btn-danger" style="padding: 6px 14px;" asp-area="admin" asp-controller="Blog" asp-action="Delete" asp-route-id="@Model[i].Id" onclick="return confirm('Are you sure?')">Delete</a>

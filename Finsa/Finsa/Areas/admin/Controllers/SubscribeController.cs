@@ -1,5 +1,6 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,16 @@ namespace Finsa.Areas.admin.Controllers
         {
             _context = context;
         }
+
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Index()
         {
             List<Subscribe> model = _context.Subscribes.ToList();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Update(int id)
         {
             return View(_context.Subscribes.Find(id));
@@ -41,6 +47,8 @@ namespace Finsa.Areas.admin.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Delete(int id)
         {
             Subscribe subscribe = _context.Subscribes.Find(id);
@@ -48,6 +56,8 @@ namespace Finsa.Areas.admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult SendMailAll()
         {
             return View(_context.Subscribes.ToList());

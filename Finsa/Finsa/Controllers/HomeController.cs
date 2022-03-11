@@ -36,12 +36,15 @@ namespace Finsa.Controllers
             model.Services = _context.Services.ToList();
             return View(model);
         }
+
+        //Subscribe
         public IActionResult Subscribe(string email)
         {
             VmSubscribe response = new VmSubscribe();
 
             if (!string.IsNullOrEmpty(email))
             {
+                //Ajax eyni mail gondermek
                 if (_context.Subscribes.Any(s => s.Mail == email))
                 {
                     response.Status1 = false;

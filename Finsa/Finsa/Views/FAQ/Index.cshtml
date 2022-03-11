@@ -2,6 +2,8 @@
 @{
     ViewData["Title"] = "Index";
 }
+@*Banner Section*@
+
 <section id="uni-banner" style="background-image: url('../../Uploads/@Model.Banner.Image');">
     <div class="container">
         <div class="banner-text">
@@ -34,6 +36,8 @@
             <div class="col-lg-6">
                 <p>@Model.Setting.FAQText</p>
             </div>
+
+            @*FAQ accordions*@
             <div class="gettoknow-accordion">
                 <ul>
                     @foreach (var item in Model.FAQs)
@@ -65,6 +69,8 @@
                             <span>Drop A Message</span>
                             <h2>Don't Hesited To Contact Us</h2>
                         </div>
+
+                        @*FAQ Send Message Action*@
                         <form asp-controller="FAQ" asp-action="SendMessage" method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="row">
@@ -110,6 +116,9 @@
     </div>
 
 </section>
+
+@*Partners section*@
+
 <div class="u-fade-type-down js-scroll-trigger">
     <section id="featuredby" class="featured-1">
         <div class="container">

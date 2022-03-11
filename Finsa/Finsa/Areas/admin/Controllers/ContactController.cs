@@ -1,5 +1,6 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,20 @@ namespace Finsa.Areas.admin.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles = "Super Admin, Admin")]
         public IActionResult Index()
         {
             List<Contact> model = _context.Contacts.ToList();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Update(int id)
         {
             return View(_context.Contacts.Find(id));
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
 
         [HttpPost]
         public IActionResult Update(Contact model)
@@ -41,6 +47,9 @@ namespace Finsa.Areas.admin.Controllers
 
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
+
         public IActionResult Delete(int id)
         {
             Contact contact = _context.Contacts.Find(id);
@@ -48,6 +57,8 @@ namespace Finsa.Areas.admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult SendMailAll()
         {
             return View(_context.Contacts.ToList());
@@ -75,6 +86,7 @@ namespace Finsa.Areas.admin.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Super Admin, Admin")]
 
         public IActionResult SendMail()
         {
@@ -100,6 +112,7 @@ namespace Finsa.Areas.admin.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "Super Admin, Admin")]
 
         public IActionResult Detail(int? Id)
         {

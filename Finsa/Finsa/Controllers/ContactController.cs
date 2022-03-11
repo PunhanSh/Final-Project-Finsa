@@ -25,6 +25,7 @@ namespace Finsa.Controllers
             model.PageImages = _context.PageImages.ToList();
             return View(model);
         }
+
         public IActionResult SendMessage()
         {
             return View();

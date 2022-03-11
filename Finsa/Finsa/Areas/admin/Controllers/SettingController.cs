@@ -1,5 +1,6 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,11 +22,15 @@ namespace Finsa.Areas.admin.Controllers
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles = "Super Admin")]
+
         public IActionResult Index()
         {
             Setting model = _context.Settings.FirstOrDefault();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin")]
+
         public IActionResult Update(int id)
         {
             return View(_context.Settings.Find(id));

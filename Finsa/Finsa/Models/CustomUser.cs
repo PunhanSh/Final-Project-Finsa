@@ -19,5 +19,7 @@ namespace Finsa.Models
         public string Image { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
+        [NotMapped]
+        public string RoleId { get; set; }
     }
 }

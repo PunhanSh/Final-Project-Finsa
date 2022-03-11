@@ -32,13 +32,13 @@
                     <div class="d-flex flex-column justify-content-center col-lg-9">
                         <h2 style="margin-bottom:20px">@Model.Name</h2>
                         <p style="font-size:20px">Writen by - <a style="color: #F44336;" asp-area="admin" asp-controller="Team" asp-action="Detail" asp-route-id="@Model.Team.Id">@Model.Team.Name</a></p>
-                        <p style="font-size:20px">Created Date - @Model.CreatedDate</p>
+                        <p style="font-size:20px">Created Date - <span style="color: #F44336;">@Model.CreatedDate</span></p>
                         <p style="font-size:20px">Description : @Html.Raw(Model.Description)</p>
                         <p style="font-size:20px">
                             Tag Names : <span>
                                 @foreach (var item in Model.TagToBlogs)
                                 {
-                                    <br><a asp-area="admin" asp-controller="Tag" asp-action="Index">@item.Tag.Name</a>
+                                    <br><a style="color: #F44336;" asp-area="admin" asp-controller="Tag" asp-action="Index">@item.Tag.Name</a>
                                 }
                             </span>
                         </p>
@@ -46,7 +46,7 @@
                             Category Names : <span>
                                 @foreach (var item in Model.BlogToCategories)
                                 {
-                                    <br><a asp-area="admin" asp-controller="Category" asp-action="Index">@item.Category.Name</a>
+                                    <br><a style="color: #F44336;" asp-area="admin" asp-controller="Category" asp-action="Index">@item.Category.Name</a>
                                 }
                             </span>
                         </p>

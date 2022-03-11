@@ -3,7 +3,7 @@
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@*Banner section*@
 <section id="uni-banner" style="background-image: url('../../Uploads/@Model.Banner.Image');">
     <div class="container">
         <div class="banner-text">
@@ -24,6 +24,9 @@
         <div class="shape-three"></div>
     </div>
 </section>
+
+@*Blog Detail section*@
+
 <section id="blogs-section">
     <div class="container">
         <div class="row justify-content-center">
@@ -106,6 +109,9 @@
                             }
                         </div>
                     </div>
+
+                    @*Blog Comment*@
+
                     <div class="blog-d-comment">
                         <h3>Comments(@Model.Blog.Comments.Count)</h3>
                         <ul>
@@ -156,6 +162,7 @@
                                 {
                                     if (self.ParentCommentId == item.Id)
                                     {
+                                       //Self Comment
                                         <ul class="children" style="margin-top:75px;">
                                             <li>
                                                 <div class="author-img" style="position: absolute; left: 0; top: -15px; max-width: 100px;">
@@ -200,6 +207,8 @@
                                         </ul>
                                     }
                                 }
+                                
+                                @*Comment Reply*@
                                 <div class="comment-write">
                                     <h3>Write Reply</h3>
                                     <form id="add-comment" asp-controller="Blog" asp-action="PostComment" method="post">
@@ -237,6 +246,9 @@
                                 }
                             }
                         </ul>
+
+                        @*Normal Comment*@
+
                         <div class="comment-write">
                             <h3>Write Comment</h3>
                             <form id="add-comment" asp-controller="Blog" asp-action="PostComment" method="post">
@@ -269,6 +281,9 @@
                     </div>
                 </div>
             </div>
+
+            @*Blog Search*@
+
             <div class="col-lg-4 col-md-8">
                 <div class="u-fade-type-right js-scroll-trigger">
                     <div class="asidebar">
@@ -283,8 +298,9 @@
                         <div class="aside category-section">
                             <h4 class="head-div">Category</h4>
                             <ul>
+                                @*Blog Categories*@
                                 @foreach (var item in Model.Categories)
-                                {
+                                 {
                                     <li>
                                         <a style="@(item.Id == Model.vmSearch.catId ? "color: #ff4a17 !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-catId="@item.Id">
                                             @item.Name
@@ -299,6 +315,7 @@
                         <div class="aside popular-tags">
                             <h4 class="head-div">Popular Tags</h4>
                             <div class="tags-div">
+                                @*Blog Tags*@
                                 @foreach (var item in Model.Tags)
                                 {
                                     <a style="@(item.Id == Model.vmSearch.tagId ? "color: #ff4a17 !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-tagId="@item.Id">@item.Name</a>
@@ -328,6 +345,7 @@
         </div>
     </div>
 </section>
+@*Partners Section*@
 <div class="u-fade-type-down js-scroll-trigger">
     <section id="featuredby" class="featured-1">
         <div class="container">

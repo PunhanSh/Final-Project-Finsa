@@ -1,3 +1,6 @@
 ﻿.btn:not(.btn-link):not(.btn-circle) i {
     font-size: initial !important;
 }
+.table th {
+    text-align: center;
+}

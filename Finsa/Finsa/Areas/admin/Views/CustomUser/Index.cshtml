@@ -1,5 +1,5 @@
 ﻿@model List<CustomUser>
-
+@inject AppDbContext context
 @{ 
     ViewData["Title"] = "Index";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
@@ -13,28 +13,42 @@
         </div>
         <div class="col-lg-12">
             <table class="table">
-                <thead>
+                <thead style="border-bottom: 2px solid;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col"></th>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Image</th>
+                        <th style="text-align: center;" scope="col">Name</th>
+                        <th style="text-align: center;" scope="col">Email</th>
+                        <th style="text-align: center;" scope="col">Role</th>
+                        <th style="text-align: center;" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                      {
                      <tr>
-                        <th scope="row"></th>
-                        <td><img src="~/Uploads/@item.Image" style="width: 100px" alt="Alternate Text" /></td>
-                        <td>@item.Name</td>
-                        <td>@item.Email</td>
-                        <td>
+                        <th style="text-align: center;" scope="row"></th>
+                        <td style="text-align: center;"><img src="~/Uploads/@item.Image" style="width: 100px" alt="Alternate Text" /></td>
+                        <td style="text-align: center;">@item.Name</td>
+                        <td style="text-align: center;">@item.Email</td>
+                        <td style="text-align: center;">@{
+                            var role = "";
+                            var user = context.UserRoles.FirstOrDefault(r=>r.UserId == item.Id);
+                            if (user!= null)
+                            {
+                                role = context.Roles.FirstOrDefault(r=>r.Id == user.RoleId).Name;
+                            }
+                            else
+                            {
+                                TempData["Erroor"] = "Role yoxdur";
+                            }
+                            @role
+                        }</td>
+                        <td style="text-align: center;">
                             <a class="btn btn-success mb-1" asp-area="admin" asp-controller="CustomUser" asp-action="Update" asp-route-id="@item.Id">Update</a>
                             <a class="btn btn-danger" asp-area="admin" asp-controller="CustomUser" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are you sure?')">Delete</a>
                         </td>
-                     </tr>
+                    </tr>
                      }
                 </tbody>
             </table>

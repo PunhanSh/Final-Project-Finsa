@@ -16,13 +16,14 @@ namespace Finsa.Areas.admin.Controllers
         private readonly AppDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-
-        public AccountController(AppDbContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(AppDbContext context, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
         //[Authorize]
         public IActionResult Register()
@@ -93,6 +94,7 @@ namespace Finsa.Areas.admin.Controllers
         }
         public IActionResult Detail(string? id)
         {
+            ViewBag.Role = _context.Roles.ToList();
             if (id != null)
             {
                 if (_context.CustomUsers.Find(id) != null)
@@ -112,6 +114,21 @@ namespace Finsa.Areas.admin.Controllers
                 TempData["BlogError"] = "Id must not be null";
                 return RedirectToAction("Index");
             }
+        }
+        public IActionResult CreateRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateRole(IdentityRole identityRole)
+        {
+            await _roleManager.CreateAsync(identityRole);
+            return RedirectToAction("Index", "CustomUser");
+        }
+        public IActionResult AccessDenied(string ReturnUrl)
+        {
+            return View();
         }
     }
 }

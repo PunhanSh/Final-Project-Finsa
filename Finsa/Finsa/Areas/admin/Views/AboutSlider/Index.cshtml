@@ -10,22 +10,22 @@
         </div>
         <div class="col-lg-12">
             <table class="table">
-                <thead>
+                <thead style="border-bottom: 2px solid;">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Content</th>
-                        <th scope="col">Owner</th>
-                        <th scope="col"></th>
+                        <th style="text-align: center;" scope="col">#</th>
+                        <th style="text-align: center;" scope="col">Content</th>
+                        <th style="text-align: center;" scope="col">Owner</th>
+                        <th style="text-align: center;" scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @for (int i = 0; i < Model.Count; i++)
                     {
                         <tr>
-                            <th scope="row">@(i+1)</th>
-                            <td>@(Model[i].Content != null && Model[i].Content.Length > 20 ? Model[i].Content.Substring(0, 20) + "..." : Model[i].Content)</td>
-                            <td>@Model[i].Team.Name</td>
-                            <td>
+                            <th style="text-align: center;" scope="row">@(i+1)</th>
+                            <td style="text-align: center;">@(Model[i].Content != null && Model[i].Content.Length > 20 ? Model[i].Content.Substring(0, 20) + "..." : Model[i].Content)</td>
+                            <td style="text-align: center;">@Model[i].Team.Name</td>
+                            <td style="text-align: center;">
                                 <a class="btn btn-success mb-1" asp-area="admin" asp-controller="AboutSlider" asp-action="Update" asp-route-id="@Model[i].Id">Update</a>
                                 <a class="btn btn-danger" asp-area="admin" asp-controller="AboutSlider" asp-action="Delete" asp-route-id="@Model[i].Id" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>

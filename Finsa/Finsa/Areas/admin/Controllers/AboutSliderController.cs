@@ -1,6 +1,7 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
 using Finsa.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace Finsa.Areas.admin.Controllers
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             List<AboutSlider> model = _context.AboutSliders.Include(t => t.Team).ToList();

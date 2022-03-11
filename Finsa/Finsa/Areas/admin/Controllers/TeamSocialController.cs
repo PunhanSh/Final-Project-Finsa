@@ -1,5 +1,6 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,11 +19,15 @@ namespace Finsa.Areas.admin.Controllers
         {
             _context = context;
         }
+        [Authorize(Roles = "Super Admin")]
+
         public IActionResult Index()
         {
             List<TeamSocial> model = _context.TeamSocials.Include(t=>t.Team).ToList();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin")]
+
         public IActionResult Create()
         {
             ViewBag.Team = _context.Teams.ToList();
@@ -55,6 +60,9 @@ namespace Finsa.Areas.admin.Controllers
             return View(model);
 
         }
+
+        [Authorize(Roles = "Super Admin")]
+
         public IActionResult Update(int id)
         {
             ViewBag.Team = _context.Teams.ToList();

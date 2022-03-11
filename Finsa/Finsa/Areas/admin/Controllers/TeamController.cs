@@ -1,5 +1,6 @@
 ﻿using Finsa.Data;
 using Finsa.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,16 +23,21 @@ namespace Finsa.Areas.admin.Controllers
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Index()
         {
             List<Team> model = _context.Teams.Include(ts => ts.TeamToSkills).ThenInclude(t => t.Skill).ToList();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Create()
         {
             ViewBag.Skill = _context.Skills.ToList();
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(Team model)
         {
@@ -95,6 +101,8 @@ namespace Finsa.Areas.admin.Controllers
             return View(model);
 
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Update(int id)
         {
             ViewBag.Skill = _context.Skills.ToList();
@@ -193,6 +201,8 @@ namespace Finsa.Areas.admin.Controllers
             ViewBag.Skill = _context.Skills.ToList();
             return View(model);
         }
+        [Authorize(Roles = "Super Admin, Admin")]
+
         public IActionResult Delete(int id)
         {
             Team team = _context.Teams.Include(w=>w.TeamSocials).Include(w=>w.AboutSliders).Include(w=>w.Blogs).Include(q=>q.TeamToSkills).FirstOrDefault(w=>w.Id==id);

@@ -25,6 +25,7 @@ namespace Finsa.Controllers
             {
                 search.page = 1;
             }
+            //her pagede blog sayi:
             double itemCount = 2;
 
             model.Setting = _context.Settings.FirstOrDefault();
@@ -39,6 +40,7 @@ namespace Finsa.Controllers
                                         .Include(t=>t.Team).ThenInclude(ts=>ts.TeamSocials)
                                         .Where(bc => (search.catId != null ? bc.BlogToCategories.Any(tb => tb.CategoryId == search.catId) : true) && (search.tagId != null ? bc.TagToBlogs.Any(tb => tb.TagId == search.tagId) : true)
                                                                       && (search.searchData != null ? bc.Name.Contains(search.searchData) : true)).ToList();
+            //Pagination 
             int PageCount = (int)Math.Ceiling(Convert.ToDecimal(blogs.Count / itemCount));
             model.Blogs = blogs.Skip(((int)search.page - 1) * (int)itemCount).Take((int)itemCount).ToList();
             ViewBag.PageCount = PageCount;
@@ -54,7 +56,8 @@ namespace Finsa.Controllers
             model.Team = _context.Teams.Include(ts => ts.TeamSocials).FirstOrDefault();
             return View(model);
         }
-    
+        
+        
         public IActionResult Detail(int? id, VmSearch search)
         {
             if (id != null)
@@ -93,6 +96,8 @@ namespace Finsa.Controllers
         }
         public IActionResult PostComment(CommentSelf commentSelf)
         {
+            //Comment
+
             if (ModelState.IsValid)
             {
                 _context.CommentSelves.Add(commentSelf);
@@ -106,6 +111,7 @@ namespace Finsa.Controllers
                 comment.CreatedDate = DateTime.Now;
                 comment.Message = commentSelf.Message;
 
+                //Self Comment
                 if (commentSelf.CommentId > 0)
                 {
                     comment.ParentCommentId = commentSelf.CommentId;
