@@ -1,0 +1,348 @@
+﻿@model VmHome
+@{
+    ViewData["Title"] = "Home Page";
+}
+<section id="about-us">
+    <div class="container">
+        <div class="u-fade-type-left js-scroll-trigger">
+            <div class="about-image" style="transform: translateY(0)">
+                <img src="assets/img/01.png" alt="">
+            </div>
+        </div>
+        <div class="u-fade-type-right js-scroll-trigger">
+            <div class="row no-gutters justify-content-lg-end justify-content-center">
+                <div class="col-lg-6 col-md-10">
+                    <div class="aboutus-context">
+                        <div class="context-1">
+                            <span>About Us</span>
+                            <h2>
+                                Professional Business
+                                <br>
+                                Guidance Agency
+                            </h2>
+                        </div>
+                        <p class="mb-25">
+                            Sedut perspiciatis unde omnis iste natus error sit voluptat em accusantium doloremq laudantium, totam raperiaeaque ipsa quae ab illo inventore veritatis et quasi
+                        </p>
+                        <p>
+                            Doloremque laudantium, totam raperiaeaque ipsa quae ab illo inventore veritatis et quasi
+                        </p>
+                        <ul class="about-items">
+                            <li><i class="far fa-check"></i>Business & Consulting Agency</li>
+                            <li><i class="far fa-check"></i>Awards Winning Business Comapny</li>
+                        </ul>
+                        <a asp-controller="About" asp-action="Index" class="my-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="company-services">
+    <div class="container">
+        <div class="services-title">
+            <span>Company Services</span>
+            <h2>
+                We Provide Most Exclusive
+                <br>
+                Service For Business
+            </h2>
+        </div>
+        <div class="u-fade-type-down js-scroll-trigger">
+            <div class="row service-cards">
+                @foreach (var item in Model.Services)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="service-card">
+                            <div class="card-icon">
+                                <img src="~/Uploads/@item.Image" alt="">
+                            </div>
+                            <h3>
+                                <a asp-controller="Service" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a>
+                            </h3>
+                            <p>
+                                @(item.Description != null && item.Description.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)
+                            </p>
+                            <a asp-controller="Service" asp-action="Detail" asp-route-id="@item.Id">
+                                <i class="fal fa-long-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="services-image">
+        <img src="~/assets/img/07.png" alt="">
+    </div>
+</section>
+<section id="exclusive-video" style="background-image: url(assets/img/video-1.jpg);">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-7 col-md-10">
+                <div class="u-fade-type-left js-scroll-trigger">
+                    <div class="video-context">
+                        <div class="context-head">
+                            <span>
+                                Watch Videos
+                            </span>
+                            <h2>
+                                Exclusive Video Presentation
+                                <br>
+                                About Recent Project
+                            </h2>
+                        </div>
+                        <p>Ranim ad minima veniam, quis nostrum exercitationem ullam corpsuscipit laboriosam, nisi ut aliquid exea commodi consequa turuis autem</p>
+                        <a asp-controller="Portfolio" asp-action="Index" class="my-btn">Need Any Project</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-10">
+                <div class="u-fade-type-right js-scroll-trigger">
+                    <div class="video-button text-md-center">
+                        <a href="#" class="youtube-link" youtubeid="@Model.Setting.VideoLink">
+                            <img src="~/assets/img/play.svg" alt="">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="video-shape">
+        <img src="~/assets/img/08.png" alt="">
+    </div>
+</section>
+<section id="ourfeatures">
+    <div class="container">
+        <div class="feature-head">
+            <span>
+                Our Core Features
+            </span>
+            <h2>
+                We Are Specialist For Many
+                <br>
+                Business Solutions
+            </h2>
+        </div>
+        <div class="row feature-cards">
+            @foreach (var item in Model.Projects)
+            {
+                <div class="col-lg-4 col-md-6 col-10 col-tiny-12">
+                    <div class="u-fade-type-up js-scroll-trigger">
+                        <div class="feature-card">
+                            <div class="feature-image" style="background-image: url('Uploads/@item.MainImage');"></div>
+                            <div class="feature-name">
+                                <a asp-controller="Portfolio" asp-action="Detail" asp-route-id="@item.Id">
+                                    <i class="fal fa-long-arrow-right"></i>
+                                </a>
+                                <h4>
+                                    @item.Name
+                                </h4>
+                                <p>
+                                    Join us for consultatoins
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section id="joinus">
+    <div class="container">
+        <div class="joinuschooses">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="u-fade-type-left js-scroll-trigger">
+                        <div class="imgdiv">
+                            <img src="~/assets/img/02.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-10">
+                    <div class="u-fade-type-right js-scroll-trigger">
+                        <div class="textdiv">
+                            <div class="text-head">
+                                <span>What We Do</span>
+                                <h2>
+                                    Why Choose Finsa
+                                    <br>
+                                    Business Agency
+                                </h2>
+                            </div>
+                            <p>
+                                Sedut perspiciatis unde omnis iste natus evoluptat em accusantium doloremque laudantium
+                            </p>
+                            <ul>
+                                <li><i class="far fa-check-circle"></i>Specialist Company Advisor Team</li>
+                                <li><i class="far fa-check-circle"></i>Understanding Machines OpenS tandard</li>
+                                <li><i class="far fa-check-circle"></i>Can Data Visualization Improve Mobile</li>
+                            </ul>
+                            <a asp-controller="Contact" asp-action="Index" class="my-btn">Join with Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="~/assets/img/03.png" alt="" class="shape-1">
+            <img src="~/assets/img/04.png" alt="" class="shape-2">
+        </div>
+    </div>
+</section>
+<section id="ourteams">
+    <div class="container">
+        <div class="section-head">
+            <span>Meet Our Advisors</span>
+            <h2>
+                We Have An Exclusive
+                <br>
+                Team Member
+            </h2>
+        </div>
+        <div class="row">
+            @foreach (var item in Model.Teams)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="u-fade-type-down js-scroll-trigger">
+                        <div class="teammember">
+                            <div class="member-image-wrap">
+                                <div class="member-image">
+                                    <img src="~/Uploads/@item.Image" alt="">
+                                    <div class="team-social">
+                                        @foreach (var social in item.TeamSocials)
+                                        {
+                                            <a href="@social.Link"><i class="@social.Icon"></i></a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="member-text">
+                                <h3><a asp-controller="Team" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></h3>
+                                <span>@item.Profession</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="u-fade-type-down js-scroll-trigger">
+    <section id="testimonial">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-6">
+                    <div class="section-head">
+                        <span>Meet Our Advisors</span>
+                        <h2>
+                            We Have An Exclusive
+                            <br>
+                            Team Member
+                        </h2>
+                    </div>
+                    <div class="owl-carousel testimonial-slider owl-theme">
+                        @foreach (var item in Model.AboutSliders)
+                        {
+                            <div class="item">
+                                <div class="section-content">
+                                    <p>
+                                        <span class="quote-top">
+                                            <i class="fas fa-quote-left"></i>
+                                        </span>
+                                        @item.Content
+                                        <span class="quote-bottom">
+                                            <i class="fas fa-quote-right"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="section-author">
+                                    <div class="author-image">
+                                        <a asp-controller="Team" asp-action="Detail" asp-route-id="@item.Team.Id"><img src="~/Uploads/@item.Team.Image" alt=""></a>
+                                    </div>
+                                    <div class="author-desc">
+                                        <a style="text-decoration: none;" asp-controller="Team" asp-action="Detail" asp-route-id="@item.Team.Id"><h4>@item.Team.Name</h4></a>
+                                        <span>@item.Team.Profession</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-image">
+            <img src="~/assets/img/testimonial.png" alt="">
+        </div>
+        <div class="testimonial-shape">
+            <img src="~/assets/img/06.png" alt="">
+        </div>
+    </section>
+</div>
+<div class="u-fade-type-down js-scroll-trigger">
+    <section id="featuredby" class="featured-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="owl-carousel featuredbyslider owl-theme">
+                        @foreach (var item in Model.Partners)
+                        {
+                            <div class="item img-fluid">
+                                <img src="~/Uploads/@item.Image" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<section id="latestblog">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-6 col-10 col-tiny-12">
+                <div class="latest-head">
+                    <span>Important Articles</span>
+                    <h2>
+                        Something Know Our
+                        <br>
+                        Latest News & Blog
+                    </h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-10 col-tiny-12">
+                <div class="button-div">
+                    <a asp-controller="Blog" asp-action="Index" class="my-btn">View All Blogs</a>
+                </div>
+            </div>
+        </div>
+        <div class="row blog-cards mt-50 justify-content-center">
+            @foreach (var item in Model.Blogs)
+             {
+             <div class="col-lg-4 col-md-6 col-10 col-tiny-12">
+                <div class="u-fade-type-down js-scroll-trigger">
+                    <div class="blog-card">
+                        <div class="blog-head">
+                            <div class="blog-image" style="background-image: url('Uploads/@item.Image');"></div>
+                        </div>
+                        <div class="blog-footer">
+                            <span>
+                                <i class="far fa-calendar-alt"></i>
+                                @item.CreatedDate.ToString("dd MMM yyyy")
+                            </span>
+                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id"><h3>@item.Name</h3></a>
+                            <p>Power of choice is untrammelled and when nothing prevents beings able to do what we like best</p>
+                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">
+                                Learn More
+                                <i class="far fa-long-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+             </div>
+             }
+        </div>
+    </div>
+</section>

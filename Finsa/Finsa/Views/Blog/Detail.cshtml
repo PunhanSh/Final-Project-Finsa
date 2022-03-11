@@ -1,0 +1,348 @@
+﻿@model VmBlog
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="uni-banner" style="background-image: url('../../Uploads/@Model.Banner.Image');">
+    <div class="container">
+        <div class="banner-text">
+            <h1>Blog</h1>
+            <ul>
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    Blogs
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="banner-shapes">
+        <div class="shape-one"></div>
+        <div class="shape-two"></div>
+        <div class="shape-three"></div>
+    </div>
+</section>
+<section id="blogs-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="u-fade-type-left js-scroll-trigger">
+                    <div class="blog-d-card">
+                        <div class="blog-d-img">
+                            <img src="~/Uploads/@Model.Blog.Image" alt="">
+                        </div>
+                        <div class="blog-d-contact">
+                            <ul>
+                                <li><i class="far fa-user"></i><a asp-controller="Team" asp-action="Detail" asp-route-id="@Model.Blog.Team.Id">@Model.Blog.Team.Name</a></li>
+                                <li><i class="far fa-calendar-alt"></i>@Model.Blog.CreatedDate.ToString("dd MMM yyyy")</li>
+                                <li><i class="far fa-comments"></i><a>Comments (@Model.Blog.Comments.Count)</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog-d-content">
+                            <h3>@Model.Blog.Name</h3>
+                            <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it but who has any right to find fault with a man who chooses</p>
+                            <blockquote>
+                                Smashing Podcast Episode With Paul Boag What Is Conversion Optimization
+                                <span>Bailey Dobson</span>
+                            </blockquote>
+                            <h4><i class="far fa-check-circle"></i>Inspired Design Decisions With Otto Storch When Idea Copy</h4>
+                            <p>No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
+                        </div>
+                        <div class="blog-d-footer d-md-flex">
+                            <div class="blog-d-tags">
+                                <ul>
+                                    <li class="head-li">Popular Tags : </li>
+                                    @foreach (var item in Model.Blog.TagToBlogs)
+                                    {
+                                        <li><a href="">@item.Tag.Name </a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="blog-d-share">
+                                <ul>
+                                    <li class="head-li">Socials : </li>
+                                    @foreach (var item in Model.Blog.Team.TeamSocials)
+                                    {
+                                        <li><a href="@item.Link"><i class="@item.Icon"></i></a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blog-d-author">
+                        <div class="blog-author-img">
+                            <img src="~/Uploads/@Model.Blog.Team.Image" alt="">
+                        </div>
+                        <div class="blog-author-content">
+                            <h4><a style="text-decoration:none;color: #14212b;" asp-controller="Team" asp-action="Detail" asp-route-id="@Model.Blog.Team.Id">@Model.Blog.Team.Name</a></h4>
+                            <p>@Model.Blog.Team.Description</p>
+                            <ul>
+                                @foreach (var item in Model.Blog.Team.TeamSocials)
+                                {
+                                    <li><a href="@item.Link"><i class="@item.Icon"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="blog-d-recent">
+                        <h3>Recently Blogs</h3>
+                        <div class="recently-blogs row">
+                            @foreach (var item in Model.Blogss)
+                            {
+                                <div class="col-lg-6 col-md-6 col-10 col-tiny-12">
+                                    <div class="recently-blog-card">
+                                        <div class="recently-blog-img">
+                                            <div class="recently-img" style="background-image: url('../../Uploads/@item.Image');"></div>
+                                            <span><i class="far fa-calendar-alt"></i>@item.CreatedDate.ToString("dd MMM yyyy")</span>
+                                        </div>
+                                        <div class="recently-content">
+                                            <h3><a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></h3>
+                                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">Learn More<i class="far fa-long-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="blog-d-comment">
+                        <h3>Comments(@Model.Blog.Comments.Count)</h3>
+                        <ul>
+                           @foreach (var item in Model.Blog.Comments)
+                            {
+                                if (item.ParentCommentId == null)
+                                {
+                            <li>
+                                <div class="comment-author-img" style=" max-width: 100px;top: -15px;">
+                                    <img src="~/assets/img/botcomment.png" alt="Image">
+                                </div>
+                                <div class="comment-content" style="margin-top: 25px;">
+                                   <h5 class="author-name">
+                                        @item.FullName
+                                        <span class="date">
+                                            @{
+                                                var date = (DateTime.Now - item.CreatedDate);
+                                                if (date.Days == 0)
+                                                {
+                                                    if (date.Hours == 0)
+                                                    {
+                                                        if (date.Minutes == 0)
+                                                        {
+                                                            @(date.Seconds) @(" seconds before")
+                                                        }
+                                                        else
+                                                        {
+                                                            @(date.Minutes) @(" minutes before")
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        @(date.Hours) @(" hours before")
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    @(date.Days) @(" days before")
+                                                }
+                                            }
+                                        </span>
+                                    </h5>
+                                    <p>
+                                        @item.Message
+                                    </p>
+                                </div>
+                               @foreach (var self in Model.Blog.Comments)
+                                {
+                                    if (self.ParentCommentId == item.Id)
+                                    {
+                                        <ul class="children" style="margin-top:75px;">
+                                            <li>
+                                                <div class="author-img" style="position: absolute; left: 0; top: -15px; max-width: 100px;">
+                                                    <img src="~/assets/img/girlcomment.png" alt="Image">
+                                                </div>
+                                                <div class="comment-content">
+                                                    <h5 class="author-name">
+                                                        @self.FullName
+                                                        <span class="date">
+                                                            @{
+                                                                var date1 = (DateTime.Now - self.CreatedDate);
+                                                                if (date1.Days == 0)
+                                                                {
+                                                                    if (date1.Hours == 0)
+                                                                    {
+                                                                        if (date1.Minutes == 0)
+                                                                        {
+                                                                            @(date1.Seconds) @(" seconds before")
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @(date1.Minutes) @(" minutes before")
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @(date1.Hours) @(" hours before")
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    @(date1.Days) @(" days before")
+                                                                }
+                                                            }
+                                                        </span>
+                                                    </h5>
+                                                    <p>
+                                                        @self.Message
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    }
+                                }
+                                <div class="comment-write">
+                                    <h3>Write Reply</h3>
+                                    <form id="add-comment" asp-controller="Blog" asp-action="PostComment" method="post">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <input asp-for="@Model.CommentSelf.FullName" placeholder="Your Fullname">
+                                                    <span><i class="far fa-user"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <input asp-for="@Model.CommentSelf.Email" placeholder="Your Email">
+                                                    <span><i class="far fa-envelope"></i></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="input-group textarea">
+                                                    <textarea asp-for="@Model.CommentSelf.Message" placeholder="Write Message"></textarea>
+                                                    <span><i class="far fa-pencil"></i></span>
+                                                </div>
+                                            </div>
+                                            <input hidden asp-for="@Model.CommentSelf.BlogId" value="@Model.Blog.Id" />
+                                            <div class="col-12">
+                                                <input hidden asp-for="@Model.CommentSelf.CommentId" value="@item.Id" />
+                                                <input hidden asp-for="@Model.CommentSelf.BlogId" value="@Model.Blog.Id" />
+                                                <button class="my-btn" style="padding: 0 20px;" type="submit">Reply to @item.CommentSelf.FullName</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </li>
+                                }
+                            }
+                        </ul>
+                        <div class="comment-write">
+                            <h3>Write Comment</h3>
+                            <form id="add-comment" asp-controller="Blog" asp-action="PostComment" method="post">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <input asp-for="@Model.CommentSelf.FullName" placeholder="Your Fullname">
+                                            <span><i class="far fa-user"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <input asp-for="@Model.CommentSelf.Email" placeholder="Your Email">
+                                            <span><i class="far fa-envelope"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="input-group textarea">
+                                            <textarea asp-for="@Model.CommentSelf.Message" placeholder="Write Message"></textarea>
+                                            <span><i class="far fa-pencil"></i></span>
+                                        </div>
+                                    </div>
+                                    <input hidden asp-for="@Model.CommentSelf.BlogId" value="@Model.Blog.Id"/>
+                                    <div class="col-12">
+                                        <button class="my-btn" type="submit">Send Comment</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8">
+                <div class="u-fade-type-right js-scroll-trigger">
+                    <div class="asidebar">
+                        <div class="aside search-section">
+                            <form method="get" asp-controller="Blog" asp-action="Index">
+                                <input type="text" name="searchData" placeholder="Search here">
+                                <button type="submit">
+                                    <i class="far fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="aside category-section">
+                            <h4 class="head-div">Category</h4>
+                            <ul>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <li>
+                                        <a style="@(item.Id == Model.vmSearch.catId ? "color: #ff4a17 !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-catId="@item.Id">
+                                            @item.Name
+                                            <span>
+                                                <i class="far fa-angle-right"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="aside popular-tags">
+                            <h4 class="head-div">Popular Tags</h4>
+                            <div class="tags-div">
+                                @foreach (var item in Model.Tags)
+                                {
+                                    <a style="@(item.Id == Model.vmSearch.tagId ? "color: #ff4a17 !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-tagId="@item.Id">@item.Name</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="aside author-blog">
+                            <img src="~/Uploads/@Model.Team.Image" alt="">
+                            <h4>@Model.Team.Name</h4>
+                            <span>Author</span>
+                            <p>@(Model.Team.Description != null && Model.Team.Description.Length > 20 ? Model.Team.Description.Substring(0, 20) + "..." : Model.Team.Description)</p>
+                            <ul>
+                                @foreach (var item in Model.Team.TeamSocials)
+                                {
+                                    <li><a href="@item.Icon"><i class="@item.Icon"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="aside consultation-div" style="background-image: url('../../assets/img/Blog/cta.jpg'); ">
+                            <h4>Need Any Consultations</h4>
+                            <a asp-controller="Contact" asp-action="Index" class="my-btn">Send Message</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<div class="u-fade-type-down js-scroll-trigger">
+    <section id="featuredby" class="featured-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="owl-carousel featuredbyslider owl-theme">
+                        @foreach (var item in Model.Partners)
+                        {
+                            <div class="item img-fluid">
+                                <img src="~/Uploads/@item.Image" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,46 @@
+﻿@model List<ServicePage>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Option1</th>
+                        <th scope="col">Option2</th>
+                        <th scope="col">Option3</th>
+                        <th scope="col">Icon1</th>
+                        <th scope="col">Icon2</th>
+                        <th scope="col">Icon3</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <th scope="row">@(i+1)</th>
+                            <td>@Model[i].Name</td>
+                            <td>@(Model[i].Description != null && Model[i].Description.Length > 25 ? Model[i].Description.Substring(0, 25) + "..." : Model[i].Description)</td>
+                            <td>@Model[i].Option1</td>
+                            <td>@Model[i].Option2</td>
+                            <td>@Model[i].Option3</td>
+                            <td>@Model[i].Icon1</td>
+                            <td>@Model[i].Icon2</td>
+                            <td>@Model[i].Icon3</td>
+                            <td>
+                                <a class="btn btn-success mb-1" asp-area="admin" asp-controller="ServicePage" asp-action="Update" asp-route-id="@Model[i].Id">Update</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

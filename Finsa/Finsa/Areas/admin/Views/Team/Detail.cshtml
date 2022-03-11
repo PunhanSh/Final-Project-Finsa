@@ -1,0 +1,44 @@
+﻿@model Team
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <div class="container">
+        <div class="row justify-content-center my-4">
+            @{
+                if (TempData["BlogError"] != null)
+                {
+                    <p style="font-size: 20px !important;" class="alert alert-danger col-lg-10 text-center">@TempData["BlogError"]</p>
+
+                    TempData["BlogtError"] = null;
+                }
+            }
+            <div class="col-lg-10 m-5">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <span style="font-size: 30px !important;" class="font-weight-bold text-facebook">Content Information</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-light p-5" style="color: #ff4a17 !important;font-size:18px">@Model.Description</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 p-3">
+                <p class="text-facebook" style="text-align: center !important; font-size: 40px !important; font-weight: 600 !important;">Employee</p>
+                <div class="d-flex p-3 shadow-sm" style="border-radius: 10px !important;">
+                    <img style="border-radius: 50% !important;" class="col-lg-3 w-25" src="~/Uploads/@(Model.Image==null?"default-avatar.png":Model.Image)" alt="Image" />
+                    <div class="d-flex flex-column justify-content-center col-lg-9">
+                        <h2 style="margin-bottom:20px">@Model.Name</h2>
+                        <p style="font-size:20px">Phone - @Model.Phone</p>
+                        <p style="font-size:20px">Email - @Model.Mail</p>
+                        <a class="btn btn-warning" style="margin-top: 20px" asp-area="admin" asp-controller="Team" asp-action="Index">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

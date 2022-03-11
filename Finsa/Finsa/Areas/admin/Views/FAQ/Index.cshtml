@@ -1,0 +1,39 @@
+﻿@model List<FAQ>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-primary mb-3" asp-area="admin" asp-controller="FAQ" asp-action="Create">Create</a>
+        </div>
+        <div class="col-lg-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Accordion Head</th>
+                        <th scope="col">Accordion Title</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                     <tr>
+                        <th scope="row">@(i+1)</th>
+                        <td>@(Model[i].AccordionHead != null && Model[i].AccordionHead.Length > 20 ? Model[i].AccordionHead.Substring(0, 20) + "..." : Model[i].AccordionHead)</td>
+                        <td>@(Model[i].AccordionTitle != null && Model[i].AccordionTitle.Length > 50 ? Model[i].AccordionTitle.Substring(0, 50) + "..." : Model[i].AccordionTitle)</td>
+                        
+                        <td>
+                            <a class="btn btn-success" asp-area="admin" asp-controller="FAQ" asp-action="Update" asp-route-id="@Model[i].Id">Update</a>
+                            <a class="btn btn-danger" asp-area="admin" asp-controller="FAQ" asp-action="Delete" asp-route-id="@Model[i].Id" onclick="return confirm('Are you sure?')">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

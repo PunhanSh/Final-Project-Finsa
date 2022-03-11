@@ -1,0 +1,57 @@
+﻿@model ServicePage
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form asp-area="Admin" asp-controller="ServicePage" asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="@Model.Name">Name</label>
+                    <input class="form-control" asp-for="@Model.Name">
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Description">Description</label>
+                    <input class="form-control" asp-for="@Model.Description">
+                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Option1">Option1</label>
+                    <input class="form-control" asp-for="@Model.Option1">
+                    <span asp-validation-for="@Model.Option1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Option2">Option2</label>
+                    <input class="form-control" asp-for="@Model.Option2">
+                    <span asp-validation-for="@Model.Option2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Option3">Option3</label>
+                    <input class="form-control" asp-for="@Model.Option3">
+                    <span asp-validation-for="@Model.Option3" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Icon1">Icon1</label>
+                    <input class="form-control" asp-for="@Model.Icon1">
+                    <span asp-validation-for="@Model.Icon1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Icon2">Icon2</label>
+                    <input class="form-control" asp-for="@Model.Icon2">
+                    <span asp-validation-for="@Model.Icon2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Icon3">Icon3</label>
+                    <input class="form-control" asp-for="@Model.Icon3">
+                    <span asp-validation-for="@Model.Icon3" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-dark" asp-area="admin" asp-controller="ServicePage" asp-action="Index">Back to List</button>
+
+            </form>
+        </div>
+    </div>
+</div>

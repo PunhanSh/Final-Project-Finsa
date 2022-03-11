@@ -1,0 +1,175 @@
+﻿@model VmAbout
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="uni-banner" style="background-image: url('Uploads/@Model.Banner.Image');">
+    <div class="container">
+        <div class="banner-text">
+            <h1>About Us</h1>
+            <ul>
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    About Us
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="banner-shapes">
+        <div class="shape-one"></div>
+        <div class="shape-two"></div>
+        <div class="shape-three"></div>
+    </div>
+</section>
+<section id="about-us">
+    <div class="container">
+        <div class="u-fade-type-left js-scroll-trigger">
+            <div class="about-image" style="transform: translateY(0)">
+                <img src="assets/img/01.png" alt="">
+            </div>
+        </div>
+        <div class="u-fade-type-right js-scroll-trigger">
+            <div class="row no-gutters justify-content-lg-end justify-content-center">
+                <div class="col-lg-6 col-md-10">
+                    <div class="aboutus-context">
+                        <div class="context-1">
+                            <span>About Us</span>
+                            <h2>
+                                Professional Business
+                                <br>
+                                Guidance Agency
+                            </h2>
+                        </div>
+                        <p class="mb-25">
+                            Sedut perspiciatis unde omnis iste natus error sit voluptat em accusantium doloremq laudantium, totam raperiaeaque ipsa quae ab illo inventore veritatis et quasi
+                        </p>
+                        <p>
+                            Doloremque laudantium, totam raperiaeaque ipsa quae ab illo inventore veritatis et quasi
+                        </p>
+                        <ul class="about-items">
+                            <li><i class="far fa-check"></i>Business & Consulting Agency</li>
+                            <li><i class="far fa-check"></i>Awards Winning Business Comapny</li>
+                        </ul>
+                        <a asp-controller="About" asp-action="Index" class="my-btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section id="company-services">
+    <div class="container">
+        <div class="services-title">
+            <span>Company Services</span>
+            <h2>
+                We Provide Most Exclusive
+                <br>
+                Service For Business
+            </h2>
+        </div>
+        <div class="u-fade-type-down js-scroll-trigger">
+            <div class="row service-cards">
+                @foreach (var item in Model.Services)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-8">
+                        <div class="service-card">
+                            <div class="card-icon">
+                                <img src="~/Uploads/@item.Image" alt="">
+                            </div>
+                            <h3>
+                                <a asp-controller="Service" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a>
+                            </h3>
+                            <p>
+                                @(item.Description != null && item.Description.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)
+                            </p>
+                            <a asp-controller="Service" asp-action="Detail" asp-route-id="@item.Id">
+                                <i class="fal fa-long-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="services-image">
+        <img src="~/assets/img/07.png" alt="">
+    </div>
+</section>
+<section id="video-about" style="background-image: url(assets/img/video-2.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="video-path">
+                    <a href="#" class="youtube-link" youtubeid="@Model.Setting.VideoLink2"><i class="fas fa-play"></i></a>
+                    <h2>
+                        Watch Our Latest Videos For Better
+                        <br>
+                        Innovative Business
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-left">
+        <img src="assets/img/12.png" alt="">
+    </div>
+    <div class="shape-right">
+        <img src="assets/img/11.png" alt="">
+    </div>
+</section>
+<section id="about-slider">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="owl-carousel" id="about-slider-2">
+                    @foreach (var item in Model.AboutSliders)
+                    {
+                        <div class="item">
+                            <div class="author-img">
+                                <img src="~/Uploads/@item.Team.Image" alt="">
+                            </div>
+                            <div class="author-content">
+                                <p>
+                                    <span class="quote-top">
+                                        <i class="fal fa-quote-left"></i>
+                                    </span>
+                                    @item.Content
+                                    <span class="quote-bottom">
+                                        <i class="fal fa-quote-right"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="author-desc">
+                                <h4>@item.Team.Name</h4>
+                                <span>@item.Team.Profession</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="u-fade-type-down js-scroll-trigger">
+    <section id="featuredby" class="featured-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="owl-carousel featuredbyslider owl-theme">
+                        @foreach (var item in Model.Partners)
+                        {
+                            <div class="item img-fluid">
+                                <img src="~/Uploads/@item.Image" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

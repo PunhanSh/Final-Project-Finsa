@@ -1,0 +1,35 @@
+﻿@model FAQ
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        @{
+            if (TempData["Erroor"] != null)
+            {
+                <div class="col-lg-12 alert alert-danger">
+                    <p>@(TempData["Erroor"]as string)</p>
+                </div>
+                TempData["Erroor"] = null;
+            }
+        }
+        <div class="col-lg-6">
+            <form asp-area="Admin" asp-controller="FAQ" asp-action="Create" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="@Model.AccordionHead">AccordionHead</label>
+                    <input class="form-control" asp-for="@Model.AccordionHead">
+                    <span asp-validation-for="@Model.AccordionHead" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.AccordionTitle">AccordionTitle</label>
+                    <input class="form-control" asp-for="@Model.AccordionTitle">
+                    <span asp-validation-for="@Model.AccordionTitle" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-dark" asp-area="admin" asp-controller="FAQ" asp-action="Index">Back to List</button>
+            </form>
+        </div>
+    </div>
+</div>

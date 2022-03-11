@@ -1,0 +1,196 @@
+﻿@model VmBlog
+@{
+    ViewData["Title"] = "Index";
+}
+<section id="uni-banner" style="background-image: url('Uploads/@Model.Banner.Image');">
+    <div class="container">
+        <div class="banner-text">
+            <h1>List of Blogs</h1>
+            <ul>
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    Blogs
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="banner-shapes">
+        <div class="shape-one"></div>
+        <div class="shape-two"></div>
+        <div class="shape-three"></div>
+    </div>
+</section>
+<section id="blogs-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="u-fade-type-left js-scroll-trigger">
+                    <div class="row justify-content-center">
+
+                        <h4 style="color: #14212b; font-weight: 700 ; margin-bottom: 30px;">
+                            Showing @if (ViewBag.AllCount != 0)
+                            {
+                                @(((ViewBag.Page - 1) * ViewBag.ItemCount) + 1)
+                            }
+                            else
+                            { @ViewBag.AllCount} -
+                            @if (ViewBag.AllCount < (ViewBag.Page * ViewBag.ItemCount))
+                            {
+                                @ViewBag.AllCount
+                            }
+                            else
+                            {
+                                @(ViewBag.Page* ViewBag.ItemCount)
+                            } of
+                            @ViewBag.AllCount
+                        </h4>
+                        @foreach (var item in Model.Blogs)
+                        {
+                            <div class="col-lg-6 col-md-6 col-10 col-tiny-12">
+                                <div class="blog-card">
+                                    <div class="blog-img">
+                                        <img src="~/Uploads/@item.Image" alt="">
+                                    </div>
+                                    <div class="blog-content">
+                                        <span><i class="far fa-calendar-alt"></i>@item.CreatedDate.ToString("dd MMM, yyyy")</span>
+                                        <h3><a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></h3>
+                                        <p>@*@(item.Description != null && item.Description.Length > 50 ? item.Description.Substring(0, 50) + "..." : item.Description)*@No one rejects, dislikes, or avoids pleasure itself, but do ot environment.</p>
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="learn-btn">Learn More<i class="far fa-long-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="pagination-blog">
+                        <ul>
+                            @if (ViewBag.PageCount != 1)
+                            {
+                                @if (ViewBag.Page <= 1)
+                                { }
+                                else
+                                {
+                                    <li class="@(ViewBag.Page==ViewBag.PageCount?"disabled":"")"><a asp-controller="Blog" asp-action="Index" asp-route-page="@(1)"><i class="fas fa-chevron-double-left"></i></a></li>
+
+                                    <li class="@(ViewBag.Page==1?"disabled":"")"><a asp-controller="Blog" asp-action="Index" asp-route-page="@(ViewBag.Page-1)"><i class="far fa-angle-left"></i></a></li>
+                                }
+                                @for (int i = 0; i < ViewBag.PageCount; i++)
+                                {
+                                    <li class="@(ViewBag.Page==(i+1)?"active-btn-page":"")"><a asp-controller="Blog" asp-action="Index" asp-route-page="@(i+1)">0@(i+1)</a></li>
+                                }
+                                @if (ViewBag.Page >= ViewBag.PageCount)
+                                { }
+                                else
+                                {
+                                    <li class="@(ViewBag.Page==ViewBag.PageCount?"disabled":"")"><a asp-controller="Blog" asp-action="Index" asp-route-page="@(ViewBag.Page+1)"><i class="far fa-angle-right"></i></a></li>
+                                }
+                                @if (ViewBag.Page < ViewBag.PageCount)
+                                {
+                                    <li class="@(ViewBag.Page==ViewBag.PageCount?"disabled":"")"><a asp-controller="Blog" asp-action="Index" asp-route-page="@(ViewBag.PageCount)"><i class="fas fa-chevron-double-right"></i></a></li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4 col-md-8">
+                <div class="u-fade-type-right js-scroll-trigger">
+                    <div class="asidebar">
+                        <div class="aside search-section">
+                            <form method="get" asp-controller="Blog" asp-action="Index">
+                                <input type="text" name="searchData" placeholder="Search here">
+                                <input asp-for="@Model.vmSearch.page" hidden />
+                                <input asp-for="@Model.vmSearch.catId" hidden />
+                                <input asp-for="@Model.vmSearch.tagId" hidden />
+                                <button type="submit">
+                                    <i class="far fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="aside category-section">
+                            <h4 class="head-div">Category</h4>
+                            <ul>
+                                @foreach (var item in Model.Categories)
+                                {
+                                    <li>
+                                        <a style="@(item.Id == Model.vmSearch.catId ? "color: #ff4a17 !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-catId="@item.Id">
+                                            @item.Name
+                                            <span>
+                                                <i class="far fa-angle-right"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="aside recent-blogs">
+                            <h4 class="head-div">Recent Blogs</h4>
+                            <div class="full-blogs">
+                                @foreach (var item in Model.RelatedBlogs)
+                                {
+                                    <div class="single-blog">
+                                        <div class="single-blog-img">
+                                            <img src="~/Uploads/@item.Image" alt="">
+                                        </div>
+                                        <div class="single-blog-content">
+                                            <span><i class="far fa-calendar-alt"></i>@item.CreatedDate.ToString("dd MMM yyyy");</span>
+                                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="aside popular-tags">
+                            <h4 class="head-div">Popular Tags</h4>
+                            <div class="tags-div">
+                                @foreach (var item in Model.Tags)
+                                {
+                                    <a style="@(item.Id == Model.vmSearch.tagId ? "background-color: #ff4a17 !important;color: #fff !important;" : "")" asp-controller="Blog" asp-action="Index" asp-route-tagId="@item.Id">@item.Name</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="aside author-blog">
+                            <img src="~/Uploads/@Model.Team.Image" alt="">
+                            <h4>@Model.Team.Name</h4>
+                            <span>Author</span>
+                            <p>@(Model.Team.Description != null && Model.Team.Description.Length > 70 ? Model.Team.Description.Substring(0, 70) + "..." : Model.Team.Description)</p>
+                            <ul>
+                                @foreach (var item in Model.Team.TeamSocials)
+                                {
+                                    <li><a href="@item.Link"><i class="@item.Icon"></i></a></li>
+                                }
+                            </ul>
+                        </div>
+                        <div class="aside consultation-div" style="background-image: url(assets/img/Blog/cta.jpg);">
+                            <h4>Need Any Consultations</h4>
+                            <a asp-controller="Contact" asp-action="Index" class="my-btn">Send Message</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="u-fade-type-down js-scroll-trigger">
+    <section id="featuredby" class="featured-1">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="owl-carousel featuredbyslider owl-theme">
+                        @foreach (var item in Model.Partners)
+                        {
+                            <div class="item img-fluid">
+                                <img src="~/Uploads/@item.Image" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+

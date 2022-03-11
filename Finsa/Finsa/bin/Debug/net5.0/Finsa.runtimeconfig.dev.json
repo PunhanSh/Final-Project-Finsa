@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\TUF DASH\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\TUF DASH\\.nuget\\packages"
+    ]
+  }
+}

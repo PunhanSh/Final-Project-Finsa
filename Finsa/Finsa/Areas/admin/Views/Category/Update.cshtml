@@ -1,0 +1,31 @@
+﻿@model Category
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        @{
+            if (TempData["Erroor"] != null)
+            {
+                <div class="col-lg-12 alert alert-danger">
+                    <p>@(TempData["Erroor"]as string)</p>
+                </div>
+                TempData["Erroor"] = null;
+            }
+        }
+        <div class="col-lg-6">
+            <form asp-area="Admin" asp-controller="Category" asp-action="Update" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="@Model.Name">Name</label>
+                    <input class="form-control" asp-for="@Model.Name">
+                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                    <input class="form-control" type="hidden" asp-for="@Model.Id">
+                </div>
+                <button type="submit" class="btn btn-success">Update</button>
+                <button type="submit" class="btn btn-dark" asp-controller="Category" asp-action="Index">Back to List</button>
+            </form>
+        </div>
+    </div>
+</div>

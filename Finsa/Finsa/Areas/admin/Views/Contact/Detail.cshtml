@@ -1,0 +1,40 @@
+﻿@model Contact
+
+@{ ViewData["Title"] = "Detail";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml"; }
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="alert col-lg-9" style="background-color: #fff; border-radius: 20px !important;">
+            <div class="align-items-center d-flex flex-lg-row justify-content-between" style="margin-bottom:20px">
+                <h1 class="m-0" style="color: #14212b; margin-bottom: 20px; ">@Model.Mail</h1>
+
+                <span style="font-size: 17px; color: #fff; background: #f44336ed; padding: 7px; border-radius: 6px;">@Model.Phone</span>
+                <span style="font-size: 17px; color: #fff; background: #f44336ed; padding: 7px; border-radius: 6px;">@Model.FullName</span>
+                <span style="font-size: 17px; color: #fff; background: #f44336ed; padding: 7px; border-radius: 6px;">
+
+                    @{ var date = (DateTime.Now - Model.CreatedDate);
+                        if (date.Days == 0)
+                        {
+                            if (date.Hours == 0)
+                            {
+                                if (date.Minutes == 0)
+                                { @(date.Seconds) @(" seconds before") }
+                                else
+                                { @(date.Minutes) @(" minutes before") }
+                            }
+                            else
+                            { @(date.Hours) @(" hours before") }
+                        }
+                        else
+                        { @(date.Days) @(" days before") } }
+                </span>
+                <p class="m-0 alert alert-link" style="font-size: 30px !important; text-decoration: none; margin-top: 25px; font-weight: 600 !important; background-color: #f44336ed; border-radius: 10px; color: #fff !important; "> @Model.Message</p>
+            </div>
+            <a style="font-size: 18px;font-weight:700;border-radius:10px;background-color: #14212b; color: #fff;" type="submit" class="btn" asp-area="admin" asp-controller="Contact" asp-action="Index">Back to List</a>
+        </div>
+        <div class="col-lg-3">
+            <i class="fas fa-address-book" style="color: #F44336; font-size: 250px"></i>
+        </div>
+    </div>
+</div>
